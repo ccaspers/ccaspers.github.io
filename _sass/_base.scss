@@ -217,7 +217,7 @@ table {
        border: 1px solid $table-border-color;
     }
 
-    tr:nth-child(odd) td,
+    tr:nth-child(even) td,
     tr:nth-child(odd) th {
         background-color: $table-odd-background-color;
     }

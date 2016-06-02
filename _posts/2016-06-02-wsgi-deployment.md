@@ -106,7 +106,7 @@ Das `app`-Modul implementiert den Einstieg in die eigentliche Applikationslogik.
 Zustäzlich ist ein Main-Block vorgesehen um die Applikation lokal mit einem
 eigenen Webserver auszuführen.
 
-## Aufbau von UR[ILN]s
+## Aufbau von URIs/URLs
 Relevante Disskusionen um URI, URL, URN auf Stackoverflow:
   - http://stackoverflow.com/q/176264
 

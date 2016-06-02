@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Python wsgi-applications and Apache!"
+title:  "Python, wsgi-Applikationen und Apache!"
 date:   2016-06-2 17:44:51 +0200
-categories: python lehre wsgi
+categories: python lehre wsgi hsrm
 ---
-# Deployment Best-Practices
+
 Das Deployment auf dem Webserver führt immer wieder zu Problemen. Die Ursachen
 sind in der Regel auf fehlerhaften Umgang mit Pfaden und falsch gesetzte
 Berechtigungen zurückzuführen.
@@ -14,13 +14,13 @@ Damit der Webserver Ihre wsgi-Applikation korrekt ausführen kann benötigt
 er Lesezugriff auf alle Dateien und Ordner die dur Applikation gehören.
 
 *Der Webserver* bezeichnet dabei die Applikation *Apache Httpd* auf dem Host
-*www*. Die Applikation wird unter einem eigenen Unix-Benutzer ausgeführt und hat
-deshalb zunächst keinen Zugriff auf die Dateien in den `public_html`-Ordnern der
-einzelnen Nutzer. Die Rechte müssen zunächste gewährt werden.
+*www* (Das www in www.mi.hs-rm.de). Die Applikation wird unter einem eigenen
+Unix-Benutzer ausgeführt und hat deshalb zunächst keinen Zugriff auf die Dateien
+in den `public_html`-Ordnern der einzelnen Nutzer.
+Die Rechte müssen zunächst gewährt werden.
 
-Für wsgi-Applikation müssen alle Verzeichnisse und Dateien auf dem Weg zum
-Applikations-Verzeichnis lesbar sein (`chmod o+r`).
-
+Für wsgi-Applikationen müssen alle Verzeichnisse und Dateien auf dem Weg zum
+Applikations-Verzeichnis mindestens lesbar sein (`chmod o+r`).
 
 ## Relative Pfade
 | Pfadanfang | Bedeutung                                               |
@@ -41,19 +41,19 @@ Applikations-Verzeichnis lesbar sein (`chmod o+r`).
 
 ## Pfade serverseitig
 Häufig werden Module und Dateien nicht gefunden, weil der Webserver die
-Programme nicht in ihrem jeweiligen Verzeichniss, sondern in seinem Home-
-Verzeichnis startet. Ihre Software wird allerdings in der Regel relative
-Pfade, ausgehend vom Wurzelverzeichnis Ihrer Applikation verwenden.
+Applikation nicht in ihrem jeweiligen Verzeichnis, sondern in seinem Home-
+Verzeichnis startet. Ihre Applikation wird allerdings in der Regel relative
+Pfade, ausgehend vom eigenen Wurzelverzeichnis verwenden.
 
 Damit die relativen Pfade weiterverwendet werden können, muss zunächst beim
-start der wsgi-Applikation dafür gesorgt werden, dass das Wurzelverzeichnis
+Start der wsgi-Applikation dafür gesorgt werden, dass das Wurzelverzeichnis
 im System-Pfad zu finden ist und auch als aktuelles Arbeitsverzeichnis genutzt
 wird. Die Änderung des Systempfads sorgt dafür, dass der Python-Interpreter
 des Webservers ihre Module finden kann. Die Änderung des aktuellen Arbeits-
-verzeichnisses sorgt dafür, dass Sie innerhalb Ihrer Module mit relativen
-Pfadangaben auf Datein verweisen können (zum Beispiel Templates).
+verzeichnisses sorgt dafür, dass Sie selbst innerhalb Ihrer Module mit relativen
+Pfadangaben auf Datein verweisen können (zum Beispiel `'./Templates/'`).
 
-Im folgenden sind zwei Dateien gezeigt über die ihre Applikation gestartet
+Im Folgenden sind zwei Dateien gezeigt, über die ihre Applikation gestartet
 werden kann. Die Datei `app.wsgi` ist dabei lediglich als Einstiegspunkt für
 den Webserver vorgesehen. Hier wird keinerlei weitere Applikationslogik auf-
 gerufen oder implementiert.
@@ -82,8 +82,8 @@ from app import application
 
 In der app.wsgi sollte kein Code stehen, der nicht für die Initialisierung der
 Applikation im wsgi-Kontext des Webservers notwendig ist. Das gezeigte
-Beispiel initialisiert lediglich die notwendingen Pfade und import danach
-die `application`-Methode aus dem `app`-Modul.
+Beispiel initialisiert lediglich die notwendingen Pfade und importiert danach
+die `application`-Funktion aus dem `app`-Modul.
 
 ### app.py
 ```python
@@ -103,7 +103,7 @@ if __name__ == '__main__':
 ```
 
 Das `app`-Modul implementiert den Einstieg in die eigentliche Applikationslogik.
-Zustäzlich ist ein Main-Block vorgesehen um die Applikation lokal mit einem
+Zustäzlich ist ein Main-Block vorgesehen, um die Applikation lokal mit einem
 eigenen Webserver auszuführen.
 
 ## Aufbau von URIs/URLs
@@ -129,24 +129,24 @@ scheme:[//[user:password@]host[:port]][/]path[?query][#fragment]
 
 ## Pfade clientseitig
 Wenn Sie ihre Software lokal ausgeführt haben, werden Sie in der Regel Pfade
-nach folgendem Schema verwendet haben:
+verwendet haben, die folgendem Muster ähneln:
 
 - `http://localhost:8080/<route>`
 
-Hier können sie scheinbar Problemlos mit Pfaden, relativ zur Seitenwurzel
+Hier können sie scheinbar Problemlos mit Pfaden, relativ zur Wurzel
 in ihren Anchor-Tags hantieren (z.B. `<a href="/kunden" > ...`).
 Lassen Sie sich davon bitte nicht täuschen. Das führt auf dem Webserver direkt
 zu folgendem Problem:
 
 Die Basis-URL ihrer Applikation auf dem Webserver lautet
 `http://www.mi.hs-rm.de/~username/wsgi/app.wsgi`. Der relative Link zu `/kunden`
-unterhalb der Seitenwurzel wird im Browser dann auf folgende URL verweisen:
+unterhalb der Wurzel wird im Browser dann auf folgende URL verweisen:
 `http://www.mi.hs-rm.de/kunden`
 
 Diese URL ist *NICHT* mehr Teil ihrer Applikation.
 
 Um ihre Applikation korrekt verwenden zu können sollten Sie URLs relativ zur
-Seitenwurzel vermeiden. Bei Einsatz von relativen URLs sollten diese immer
+Wurzel vermeiden. Bei Einsatz von relativen URLs sollten diese immer
 relativ zum aktuellen Verzeichnis sein.
 
 Falls das weiterhin problematisch ist, sollten Sie in Betracht ziehen,

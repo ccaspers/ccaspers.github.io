@@ -17,3 +17,5 @@ github_username:  ccaspers
 
 # Build settings
 markdown: kramdown
+kramdown:
+  input: GFM

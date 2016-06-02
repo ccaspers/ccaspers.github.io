@@ -160,3 +160,7 @@ def render(request):
     customer_link = request.url_root + 'kunden'
     return template % customer_link
 ```
+
+---
+Sollten Sie Fehler finden, scheuen Sie nicht davor zurück, eine E-Mail an
+die angegebene Adresse zu senden.

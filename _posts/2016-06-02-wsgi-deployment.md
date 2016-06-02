@@ -1,3 +1,9 @@
+---
+layout: post
+title:  "Python wsgi-applications and Apache!"
+date:   2016-04-15 18:44:51 +0200
+categories: python lehre wsgi
+---
 # Deployment Best-Practices
 Das Deployment auf dem Webserver führt immer wieder zu Problemen. Die Ursachen
 sind in der Regel auf fehlerhaften Umgang mit Pfaden und falsch gesetzte

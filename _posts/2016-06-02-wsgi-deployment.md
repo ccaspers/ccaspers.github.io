@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Python wsgi-applications and Apache!"
-date:   2016-04-15 18:44:51 +0200
+date:   2016-06-2 17:44:51 +0200
 categories: python lehre wsgi
 ---
 # Deployment Best-Practices

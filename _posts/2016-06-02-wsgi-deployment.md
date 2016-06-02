@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Python, wsgi-Applikationen und Apache!"
+title:  "Python, WSGI-Applikationen und Apache!"
 date:   2016-06-2 17:44:51 +0200
-categories: python lehre wsgi hsrm
+categories: python lehre WSGI hsrm
 ---
 
 Das Deployment auf dem Webserver führt immer wieder zu Problemen. Die Ursachen
@@ -10,7 +10,7 @@ sind in der Regel auf fehlerhaften Umgang mit Pfaden und falsch gesetzte
 Berechtigungen zurückzuführen.
 
 ## Berechtigungen
-Damit der Webserver Ihre wsgi-Applikation korrekt ausführen kann benötigt
+Damit der Webserver Ihre WSGI-Applikation korrekt ausführen kann benötigt
 er Lesezugriff auf alle Dateien und Ordner die dur Applikation gehören.
 
 *Der Webserver* bezeichnet dabei die Applikation *Apache Httpd* auf dem Host
@@ -19,7 +19,7 @@ Unix-Benutzer ausgeführt und hat deshalb zunächst keinen Zugriff auf die Datei
 in den `public_html`-Ordnern der einzelnen Nutzer.
 Die Rechte müssen zunächst gewährt werden.
 
-Für wsgi-Applikationen müssen alle Verzeichnisse und Dateien auf dem Weg zum
+Für WSGI-Applikationen müssen alle Verzeichnisse und Dateien auf dem Weg zum
 Applikations-Verzeichnis mindestens lesbar sein (`chmod o+r`).
 
 ## Relative Pfade
@@ -32,9 +32,9 @@ Applikations-Verzeichnis mindestens lesbar sein (`chmod o+r`).
 ### Beispiele
 | URL | href | Ziel |
 |-----|------|-------------|
-| http://www.mi.hs-rm.de/~user/wsgi/app.wsgi/ | /kunde             | http://www.mi.hs-rm.de/kunde |
-| http://www.mi.hs-rm.de/~user/wsgi/app.wsgi/ | ./kunde            | http://www.mi.hs-rm.de/~user/wsgi/app.wsgi/kunde |
-| http://www.mi.hs-rm.de/~user/wsgi/app.wsgi/ | ../kunde           | http://www.mi.hs-rm.de/~user/wsgi/kunde |
+| http://www.mi.hs-rm.de/~user/WSGI/app.wsgi/ | /kunde             | http://www.mi.hs-rm.de/kunde |
+| http://www.mi.hs-rm.de/~user/WSGI/app.wsgi/ | ./kunde            | http://www.mi.hs-rm.de/~user/WSGI/app.wsgi/kunde |
+| http://www.mi.hs-rm.de/~user/WSGI/app.wsgi/ | ../kunde           | http://www.mi.hs-rm.de/~user/WSGI/kunde |
 | http://localhost:8080/                      | /kunde             | http://localhost:8080/kunde |
 | http://localhost:8080/                      | ./kunde            | http://localhost:8080/kunde |
 | http://localhost:8080/                      | ../kunde           | http://localhost:8080/kunde |
@@ -46,7 +46,7 @@ Verzeichnis startet. Ihre Applikation wird allerdings in der Regel relative
 Pfade, ausgehend vom eigenen Wurzelverzeichnis verwenden.
 
 Damit die relativen Pfade weiterverwendet werden können, muss zunächst beim
-Start der wsgi-Applikation dafür gesorgt werden, dass das Wurzelverzeichnis
+Start der WSGI-Applikation dafür gesorgt werden, dass das Wurzelverzeichnis
 im System-Pfad zu finden ist und auch als aktuelles Arbeitsverzeichnis genutzt
 wird. Die Änderung des Systempfads sorgt dafür, dass der Python-Interpreter
 des Webservers ihre Module finden kann. Die Änderung des aktuellen Arbeits-
@@ -81,7 +81,7 @@ from app import application
 ```
 
 In der app.wsgi sollte kein Code stehen, der nicht für die Initialisierung der
-Applikation im wsgi-Kontext des Webservers notwendig ist. Das gezeigte
+Applikation im WSGI-Kontext des Webservers notwendig ist. Das gezeigte
 Beispiel initialisiert lediglich die notwendingen Pfade und importiert danach
 die `application`-Funktion aus dem `app`-Modul.
 
@@ -123,7 +123,7 @@ scheme:[//[user:password@]host[:port]][/]path[?query][#fragment]
 - scheme: http, https, ftp ...
 - z.B www.mi.hs-rm.de
 - Port z.B.: 80
-- Path z.B.: ~/username/wsgi/app.wsgi/kunden
+- Path z.B.: ~/username/WSGI/app.wsgi/kunden
 - query z.B.: page=1&orderby=name&order=asc
 - fragment: wird vom User-Agent clientseitig ausgewertet, HTML: Anchor auf Seite
 
@@ -139,7 +139,7 @@ Lassen Sie sich davon bitte nicht täuschen. Das führt auf dem Webserver direkt
 zu folgendem Problem:
 
 Die Basis-URL ihrer Applikation auf dem Webserver lautet
-`http://www.mi.hs-rm.de/~username/wsgi/app.wsgi`. Der relative Link zu `/kunden`
+`http://www.mi.hs-rm.de/~username/WSGI/app.wsgi`. Der relative Link zu `/kunden`
 unterhalb der Wurzel wird im Browser dann auf folgende URL verweisen:
 `http://www.mi.hs-rm.de/kunden`
 

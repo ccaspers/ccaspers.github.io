@@ -2,7 +2,8 @@
 layout: post
 title:  "Python, WSGI-Applikationen und Apache"
 date:   2016-06-2 17:44:51 +0200
-categories: python lehre WSGI hsrm
+categories: lehre
+tags: python, apache, wsgi
 excerpt_separator: <!--more-->
 ---
 

@@ -177,5 +177,7 @@ def render(request):
 ### Siehe auch
 - [Werkzeug BaseRequest.url_root](http://werkzeug.pocoo.org/docs/0.11/wrappers/#werkzeug.wrappers.BaseRequest.url_root)
 - [Apache Web Server](https://httpd.apache.org/)
+- [Python WSGI](https://www.python.org/dev/peps/pep-0333/)
+
 ---
 Sollten Sie Fehler finden, senden Sie mir bitte eine E-Mail.

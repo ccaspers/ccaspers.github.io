@@ -1,14 +1,18 @@
 ---
 layout: post
-title:  "Python, WSGI-Applikationen und Apache!"
+title:  "Python, WSGI-Applikationen und Apache"
 date:   2016-06-2 17:44:51 +0200
 categories: python lehre WSGI hsrm
+excerpt_separator: <!--more-->
 ---
 
-Das Deployment auf dem Webserver führt immer wieder zu Problemen. Die Ursachen
-sind in der Regel auf fehlerhaften Umgang mit Pfaden und falsch gesetzte
-Berechtigungen zurückzuführen.
+Nach der lokalen Entwicklung kommt es häufig zu Problemen beim Deployment auf
+dem WSGI-fähigen Webserver. Hauptursache sind fehlende oder fehlerhaft gesetzte
+Datei- und Ordnerberechtigungen. Dieser Posts beschäftigt sich mit der
+notwendigen Konfiguration und Implementierungshinweisen für einen reibungslosen
+Betrieb einer WSGI-Applikation auf dem Apache Webserver.
 
+<!--more-->
 ## Berechtigungen
 Damit der Webserver Ihre WSGI-Applikation korrekt ausführen kann benötigt
 er Lesezugriff auf alle Dateien und Ordner die dur Applikation gehören.
@@ -39,7 +43,7 @@ Applikations-Verzeichnis mindestens lesbar sein (`chmod o+r`).
 | http://localhost:8080/                      | ./kunde            | http://localhost:8080/kunde |
 | http://localhost:8080/                      | ../kunde           | http://localhost:8080/kunde |
 
-## Pfade serverseitig
+## URLs und Dateipfade im Backend
 Häufig werden Module und Dateien nicht gefunden, weil der Webserver die
 Applikation nicht in ihrem jeweiligen Verzeichnis, sondern in seinem Home-
 Verzeichnis startet. Ihre Applikation wird allerdings in der Regel relative
@@ -127,7 +131,7 @@ scheme:[//[user:password@]host[:port]][/]path[?query][#fragment]
 - query z.B.: page=1&orderby=name&order=asc
 - fragment: wird vom User-Agent clientseitig ausgewertet, HTML: Anchor auf Seite
 
-## Pfade clientseitig
+## URLs im Frontend
 Wenn Sie ihre Software lokal ausgeführt haben, werden Sie in der Regel Pfade
 verwendet haben, die folgendem Muster ähneln:
 
@@ -162,5 +166,5 @@ def render(request):
 ```
 
 ---
-Sollten Sie Fehler finden, scheuen Sie nicht davor zurück, eine E-Mail an
-die angegebene Adresse zu senden.
+Sollten Sie Fehler finden, bitte ich Sie, mir eine E-Mail zu senden, damit
+dieser Zeitnah korrigiert werden kann.

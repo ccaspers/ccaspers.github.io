@@ -174,7 +174,8 @@ def render(request):
 - Nutzen Sie die `.wsgi`-Datei dazu, den Webserver seine Arbeit im richtigen
   Verzeichnis verrichten zu lassen (`os.chhdir`) und ihre Module auffindbar zu
   machen (`sys.path.append`)
-- generieren Sie absolute URLs im Frontend
+- generieren Sie absolute URLs im Frontend, wenn Sie zu viele Probleme mit
+  relativen URLs haben.
 
 ### Siehe auch
 - [Werkzeug BaseRequest.url_root](http://werkzeug.pocoo.org/docs/0.11/wrappers/#werkzeug.wrappers.BaseRequest.url_root)

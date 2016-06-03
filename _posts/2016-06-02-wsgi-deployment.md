@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Python, WSGI-Applikationen und Apache"
+title:  "Python, WSGI und Betrieb mit dem Apache Webserver"
 date:   2016-06-2 17:44:51 +0200
 categories: lehre
 tags: python, apache, wsgi

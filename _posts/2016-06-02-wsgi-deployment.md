@@ -114,9 +114,11 @@ eigenen Webserver auszuführen.
 
 ## Aufbau von URIs/URLs
 Relevante Disskusionen um URI, URL, URN auf Stackoverflow:
+
   - http://stackoverflow.com/q/176264
 
 Mit den wichtigen Antworten:
+
   - http://stackoverflow.com/a/176274
   - http://stackoverflow.com/a/1984225
 

@@ -165,6 +165,11 @@ def render(request):
     return template % customer_link
 ```
 
+# tl;dr
+- Sorgen Sie mit `chmod o+r` dafür, dass Dateien für den Webserver lesbar sind.
+- Nutzen Sie die `.wsgi`-Datei dazu, den Webserver in das richtige Verzeichnis
+  zu befördern (`os.chhdir`) und die Modul auffindbar zu machen (`sys.path.append`)
+- generieren Sie absolute URLs im Frontend
+
 ---
-Sollten Sie Fehler finden, bitte ich Sie, mir eine E-Mail zu senden, damit
-dieser Zeitnah korrigiert werden kann.
+Sollten Sie Fehler finden, senden Sie mir bitte eine E-Mail.

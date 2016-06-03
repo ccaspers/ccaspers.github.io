@@ -28,6 +28,29 @@ Die Rechte müssen zunächst gewährt werden.
 Für WSGI-Applikationen müssen alle Verzeichnisse und Dateien auf dem Weg zum
 Applikations-Verzeichnis mindestens lesbar sein (`chmod o+r`).
 
+## Aufbau von URIs/URLs
+Relevante Disskusionen um URI, URL, URN auf Stackoverflow:
+
+  - http://stackoverflow.com/q/176264
+
+Mit den wichtigen Antworten:
+
+  - http://stackoverflow.com/a/176274
+  - http://stackoverflow.com/a/1984225
+
+Eine URI ist wie folgt aufgebaut:
+
+```
+scheme:[//[user:password@]host[:port]][/]path[?query][#fragment]
+```
+
+- Scheme: `http`, `https`, `ftp` ...
+- Host z.B.: `www.mi.hs-rm.de`
+- Port z.B.: `80`
+- Path z.B.: `~/username/WSGI/app.wsgi/kunden`
+- Query z.B.: `?page=1&orderby=name`
+- Fragment: wird vom User-Agent clientseitig ausgewertet, HTML: Anchor auf Seite
+
 ## Relative Pfade
 | Pfadanfang | Bedeutung                                               |
 |------------|---------------------------------------------------------|
@@ -111,29 +134,6 @@ if __name__ == '__main__':
 Das `app`-Modul implementiert den Einstieg in die eigentliche Applikationslogik.
 Zustäzlich ist ein Main-Block vorgesehen, um die Applikation lokal mit einem
 eigenen Webserver auszuführen.
-
-## Aufbau von URIs/URLs
-Relevante Disskusionen um URI, URL, URN auf Stackoverflow:
-
-  - http://stackoverflow.com/q/176264
-
-Mit den wichtigen Antworten:
-
-  - http://stackoverflow.com/a/176274
-  - http://stackoverflow.com/a/1984225
-
-Eine URI ist wie folgt aufgebaut:
-
-```
-scheme:[//[user:password@]host[:port]][/]path[?query][#fragment]
-```
-
-- Scheme: `http`, `https`, `ftp` ...
-- Host z.B.: `www.mi.hs-rm.de`
-- Port z.B.: `80`
-- Path z.B.: `~/username/WSGI/app.wsgi/kunden`
-- Query z.B.: `?page=1&orderby=name`
-- Fragment: wird vom User-Agent clientseitig ausgewertet, HTML: Anchor auf Seite
 
 ## URLs im Frontend
 Wenn Sie ihre Software lokal testen, werden Sie in der Regel Pfade

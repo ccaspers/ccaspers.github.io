@@ -7,11 +7,12 @@ tags: python, apache, wsgi
 excerpt_separator: <!--more-->
 ---
 
-Nach der lokalen Entwicklung kommt es häufig zu Problemen beim Deployment auf
-dem WSGI-fähigen Webserver. Hauptursache sind fehlende oder fehlerhaft gesetzte
-Datei- und Ordnerberechtigungen. Dieser Posts beschäftigt sich mit der
-notwendigen Konfiguration und Implementierungshinweisen für einen reibungslosen
-Betrieb einer WSGI-Applikation auf dem Apache Webserver.
+Durch die Entwicklung ihrer Webapplikation in ihrer lokalen Umgebung kommt es
+häufig zu Problemen beim Deployment auf dem WSGI-fähigen Webserver. Hauptursache
+sind fehlende oder fehlerhaft gesetzte Datei- und Ordnerberechtigungen.
+Dieser Post beschäftigt sich mit der notwendigen Konfiguration und enthält
+Implementierungshinweise für den reibungslosen Betrieb einer WSGI-Applikation
+auf dem Apache Webserver.
 
 <!--more-->
 ## Berechtigungen
@@ -58,7 +59,7 @@ des Webservers ihre Module finden kann. Die Änderung des aktuellen Arbeits-
 verzeichnisses sorgt dafür, dass Sie selbst innerhalb Ihrer Module mit relativen
 Pfadangaben auf Datein verweisen können (zum Beispiel `'./Templates/'`).
 
-Im Folgenden sind zwei Dateien gezeigt, über die ihre Applikation gestartet
+Im Folgenden sind zwei Dateien gezeigt, über die Ihre Applikation gestartet
 werden kann. Die Datei `app.wsgi` ist dabei lediglich als Einstiegspunkt für
 den Webserver vorgesehen. Hier wird keinerlei weitere Applikationslogik auf-
 gerufen oder implementiert.
@@ -88,7 +89,7 @@ from app import application
 In der app.wsgi sollte kein Code stehen, der nicht für die Initialisierung der
 Applikation im WSGI-Kontext des Webservers notwendig ist. Das gezeigte
 Beispiel initialisiert lediglich die notwendingen Pfade und importiert danach
-die `application`-Funktion aus dem `app`-Modul.
+die Funktion `application` aus dem Modul `app`.
 
 ### app.py
 ```python
@@ -125,21 +126,21 @@ Eine URI ist wie folgt aufgebaut:
 scheme:[//[user:password@]host[:port]][/]path[?query][#fragment]
 ```
 
-- scheme: http, https, ftp ...
-- z.B www.mi.hs-rm.de
-- Port z.B.: 80
-- Path z.B.: ~/username/WSGI/app.wsgi/kunden
-- query z.B.: page=1&orderby=name&order=asc
-- fragment: wird vom User-Agent clientseitig ausgewertet, HTML: Anchor auf Seite
+- Scheme: `http`, `https`, `ftp` ...
+- Host z.B.: `www.mi.hs-rm.de`
+- Port z.B.: `80`
+- Path z.B.: `~/username/WSGI/app.wsgi/kunden`
+- Query z.B.: `?page=1&orderby=name`
+- Fragment: wird vom User-Agent clientseitig ausgewertet, HTML: Anchor auf Seite
 
 ## URLs im Frontend
-Wenn Sie ihre Software lokal ausgeführt haben, werden Sie in der Regel Pfade
-verwendet haben, die folgendem Muster ähneln:
+Wenn Sie ihre Software lokal testen, werden Sie in der Regel Pfade
+verwenden, die folgendem Muster ähneln:
 
 - `http://localhost:8080/<route>`
 
-Hier können sie scheinbar Problemlos mit Pfaden, relativ zur Wurzel
-in ihren Anchor-Tags hantieren (z.B. `<a href="/kunden" > ...`).
+Hier können sie scheinbar problemlos mit Pfaden, relativ zur Wurzel
+in Ihren Anchor-Tags hantieren (z.B. `<a href="/kunden" > ...`).
 Lassen Sie sich davon bitte nicht täuschen. Das führt auf dem Webserver direkt
 zu folgendem Problem:
 
@@ -168,9 +169,13 @@ def render(request):
 
 # tl;dr
 - Sorgen Sie mit `chmod o+r` dafür, dass Dateien für den Webserver lesbar sind.
-- Nutzen Sie die `.wsgi`-Datei dazu, den Webserver in das richtige Verzeichnis
-  zu befördern (`os.chhdir`) und die Modul auffindbar zu machen (`sys.path.append`)
+- Nutzen Sie die `.wsgi`-Datei dazu, den Webserver seine Arbeit im richtigen
+  Verzeichnis verrichten zu lassen (`os.chhdir`) und ihre Module auffindbar zu
+  machen (`sys.path.append`)
 - generieren Sie absolute URLs im Frontend
 
+### Siehe auch
+- [Werkzeug BaseRequest.url_root](http://werkzeug.pocoo.org/docs/0.11/wrappers/#werkzeug.wrappers.BaseRequest.url_root)
+- [Apache Web Server](https://httpd.apache.org/)
 ---
 Sollten Sie Fehler finden, senden Sie mir bitte eine E-Mail.

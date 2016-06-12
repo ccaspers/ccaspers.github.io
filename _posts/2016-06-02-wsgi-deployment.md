@@ -13,8 +13,8 @@ sind fehlende oder fehlerhaft gesetzte Datei- und Ordnerberechtigungen.
 Dieser Post beschäftigt sich mit der notwendigen Konfiguration und enthält
 Implementierungshinweise für den reibungslosen Betrieb einer WSGI-Applikation
 auf dem Apache Webserver.
-
 <!--more-->
+
 ## Berechtigungen
 Damit der Webserver Ihre WSGI-Applikation korrekt ausführen kann benötigt
 er Lesezugriff auf alle Dateien und Ordner die dur Applikation gehören.
@@ -31,12 +31,12 @@ Applikations-Verzeichnis mindestens lesbar sein (`chmod o+r`).
 ## Aufbau von URIs/URLs
 Relevante Disskusionen um URI, URL, URN auf Stackoverflow:
 
-  - http://stackoverflow.com/q/176264
+  - <http://stackoverflow.com/q/176264>
 
 Mit den wichtigen Antworten:
 
-  - http://stackoverflow.com/a/176274
-  - http://stackoverflow.com/a/1984225
+  - <http://stackoverflow.com/a/176274>
+  - <http://stackoverflow.com/a/1984225>
 
 Eine URI ist wie folgt aufgebaut:
 
@@ -52,15 +52,17 @@ scheme:[//[user:password@]host[:port]][/]path[?query][#fragment]
 - Fragment: wird vom User-Agent clientseitig ausgewertet, HTML: Anchor auf Seite
 
 ## Relative Pfade
+
 | Pfadanfang | Bedeutung                                               |
-|------------|---------------------------------------------------------|
+|:-----------|:--------------------------------------------------------|
 | `/`        | Relativ von Wurzel ausgehend                            |
 | `./`       | Relativ zu aktuellem Verzeichnis                        |
 | `../`      | Relativ zu übergeordnetem Verzeichnis                   |
 
 ### Beispiele
+
 | URL | href | Ziel |
-|-----|------|-------------|
+|:----|:-----|:------------|
 | http://www.mi.hs-rm.de/~user/WSGI/app.wsgi/ | /kunde             | http://www.mi.hs-rm.de/kunde |
 | http://www.mi.hs-rm.de/~user/WSGI/app.wsgi/ | ./kunde            | http://www.mi.hs-rm.de/~user/WSGI/app.wsgi/kunde |
 | http://www.mi.hs-rm.de/~user/WSGI/app.wsgi/ | ../kunde           | http://www.mi.hs-rm.de/~user/WSGI/kunde |
@@ -88,7 +90,7 @@ den Webserver vorgesehen. Hier wird keinerlei weitere Applikationslogik auf-
 gerufen oder implementiert.
 
 Die Datei `app.py` enthält den eigentlichen Einstiegspunkt in Ihre Applikation
-(die Implementierung der `application`-Funtkion) sowie einen Block zum starten
+(die Implementierung der `application`-Funktion) sowie einen Block zum starten
 eines lokalen Webservers für die Entwicklung.
 
 ### app.wsgi

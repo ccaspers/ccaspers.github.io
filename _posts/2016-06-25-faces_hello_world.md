@@ -1,13 +1,14 @@
 ---
 layout: post
 title:  "Ein JSF-Projekt konfigurieren"
-date:   2016-06-25 17:44:51 +0200
+date:   2016-06-25 12:00:00 +0200
 categories: lehre
 tags: java, jsf
 excerpt_separator: <!--more-->
 ---
+
 JavaServer Faces ist ein UI-Framework zur Entwicklung Java-basierter Webanwendungen, die innerhalb eines Java Applikations Servers ausgeführt werden. Im folgenden wird ein einfaches JSF-Projekt in Eclipse angelegt und über Apache Tomcat deployt um einen leichten Einstieg in die Entwicklung von JSF-Applikationen zu ermöglichen.
-<!-- more -->
+<!--more-->
 
 # Vorraussetzungen
 - Java 7+

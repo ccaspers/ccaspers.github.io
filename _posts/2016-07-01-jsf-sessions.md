@@ -12,7 +12,7 @@ excerpt_separator: <!--more-->
 > Wie verwendet man denn in JSF sessions? Ich versteh das nicht so ganz.
 > Wir sollen ja keine Servlets verwenden, also ist HttpSession ja raus.
 >
-> Gibt es da eine alternative?
+> Gibt es da eine Alternative?
 
 Jein. JSF verwendet ebenfalls HTTP-Sessions, allerdings versteckt unter der Abstraktionsschicht namens SessionScope.
 

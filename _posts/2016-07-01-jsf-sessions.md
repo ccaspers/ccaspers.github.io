@@ -16,6 +16,8 @@ excerpt_separator: <!--more-->
 
 Jein. JSF verwendet ebenfalls HTTP-Sessions, allerdings versteckt unter der Abstraktionsschicht namens SessionScope.
 
+<!--more-->
+
 Folgende Scopes sind von zentraler Bedeutung:
 
 - ApplicationScope  

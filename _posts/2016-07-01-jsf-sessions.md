@@ -60,3 +60,10 @@ So kann auf Attribute der Session lesend und schreiben zugegriffen werden, nicht
 FacesContext context = FacesContext.getCurrentInstance();
 HttpSession session = (HttpSession)context.getExternalContext().getSession(true);
 ```
+
+Nachtrag:
+Es ist ebenfalls möglich, mittels EL explizit auf Attribute einzelner Scopes zuzugreifen. Ein Beispiel:
+```
+#{sessionScope.myProperty}
+```
+Sucht das Attribut mit dem Schlüssel "myProperty" im SessionScope. Sollten sie versuchen, eine ManagedBean mit SessionScope auf diese Weise zu referenzieren, wird das nicht funktionieren, da die so **nicht** automatisch instanziiert wird. 
